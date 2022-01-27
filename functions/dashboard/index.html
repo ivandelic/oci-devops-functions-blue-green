@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>CodePen - Third Step Axios and Vue</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab" rel="stylesheet">
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.13/vue.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js'></script>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            background: #7E8D85;
+            font-family: "Roboto Slab", serif;
+            line-height: 1.4;
+        }
+
+        #app {
+            margin-top: 20px;
+            width: 500px;
+            padding: 0 40px 40px;
+            background: #2F242C;
+            border-radius: 5px;
+            color: #B3BFB8;
+        }
+
+        h1 {
+            color: #F0F7F4;
+        }
+
+        .lighten {
+            color: white;
+        }
+    </style>
+</head>
+
+<body translate="no">
+    <div id="app">
+        <h1>OCI Functions Vue Protptype</h1>
+        <span class="lighten">
+            <span>USD: </span>{{ prices.usd | currencydecimal }}<br />
+            <span>EUR: </span>{{ prices.eur | currencydecimal }}
+        </span>
+    </div>
+    <script id="rendered-js">
+        new Vue({
+            el: '#app',
+            data() {
+                return {
+                    prices: {}
+                };
+            },
+            filters: {
+                currencydecimal (value = 0) {
+                    return value.toFixed(2)
+                }
+            },
+            mounted() {
+                axios.
+                    post('https://mq2p2y6tf66vp6z76jj5fyypiy.apigateway.eu-frankfurt-1.oci.customer-oci.com/dwd/api-retriever', {}).
+                    then(response => this.prices = response.data);
+            }
+        });
+    </script>
+</body>
+
+</html>
