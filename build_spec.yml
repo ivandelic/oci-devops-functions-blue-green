@@ -16,8 +16,4 @@ steps:
     command: |
       cd functions/api-retriever
       fn build
-
-outputArtifacts:
-  - name: api-retriever
-    type: DOCKER_IMAGE
-    location: eu-frankfurt-1.ocir.io/frsxwtjslf35/dwd/api-retriever
+      fn push
