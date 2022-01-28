@@ -1,21 +1,25 @@
 # general
 variable "region" {
-    type = string
+  type = string
 }
 variable "tenancy_ocid" {
-    type = string
+  type = string
 }
 variable "compartment_ocid" {
-    type = string
+  type = string
 }
 
 # user identity
 variable "user_ocid" {
-    type = string
+  type = string
 }
 variable "fingerprint" {
-    type = string
+  type = string
 }
 variable "private_key_path" {
-    type = string
+  type = string
+}
+
+variable "resource_manager_trigger_function_id" {
+  type = string
 }

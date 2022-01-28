@@ -25,4 +25,5 @@ module "dwd_geo_devops" {
   artifact_repository_name                        = "dwd-geo-artifact-repo"
   container_image_path                            = "eu-frankfurt-1.ocir.io/frsxwtjslf35/dwd/"
   arifact_build_spec_fn_image                     = "api-retriever"
+  resource_manager_trigger_function_id            = var.resource_manager_trigger_function_id
 }

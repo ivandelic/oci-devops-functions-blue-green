@@ -78,7 +78,7 @@ resource "oci_devops_deploy_artifact" "devops_deploy_artifact_image_departments"
     display_name = "image-departments"
 }
 
-/*resource "oci_devops_build_pipeline_stage" "devops_build_pipeline_stage_trigger" {
+resource "oci_devops_build_pipeline_stage" "devops_build_pipeline_stage_trigger" {
     display_name = "trigger-deployment-pipeline"
     description = "Trigger deployment pipeline"
     build_pipeline_id = oci_devops_build_pipeline.devops_build_pipeline.id
@@ -104,10 +104,10 @@ resource "oci_devops_trigger" "devops_trigger" {
 }
 
 resource "oci_devops_deploy_environment" "deploy_environment" {
-    deploy_environment_type = "OKE_CLUSTER"
+    deploy_environment_type = "FUNCTION"
     project_id = oci_devops_project.devops_project.id
-    cluster_id = var.deployment_oke_cluster_ocid
-    display_name = "oke-deploy-environment"
+    function_id = var.resource_manager_trigger_function_id
+    display_name = "fn-deploy-environment"
 }
 
 resource "oci_devops_deploy_pipeline" "devops_deploy_pipeline" {
@@ -123,53 +123,16 @@ resource "oci_devops_deploy_pipeline" "devops_deploy_pipeline" {
     }
 }
 
-resource "oci_devops_deploy_stage" "devops_deploy_stage_departments" {
-    display_name = "deploy-departments"
+resource "oci_devops_deploy_stage" "test_deploy_stage" {
+    display_name = "run-function-resource-manager"
     deploy_pipeline_id = oci_devops_deploy_pipeline.devops_deploy_pipeline.id
     deploy_stage_predecessor_collection {
         items {
             id = oci_devops_deploy_pipeline.devops_deploy_pipeline.id
         }
     }
-    deploy_stage_type = "OKE_DEPLOYMENT"
-    kubernetes_manifest_deploy_artifact_ids = [oci_devops_deploy_artifact.devops_deploy_artifact_manifest_departments.id]
-    namespace = var.deployment_oke_cluster_namespace
-    oke_cluster_deploy_environment_id = oci_devops_deploy_environment.deploy_environment.id
-    rollback_policy {
-        policy_type = "AUTOMATED_STAGE_ROLLBACK_POLICY"
-    }
+    deploy_stage_type = "INVOKE_FUNCTION"
+    function_deploy_environment_id = oci_devops_deploy_environment.deploy_environment.id
+    is_async = false
+    is_validation_enabled = false
 }
-
-resource "oci_devops_deploy_stage" "devops_deploy_stage_branches" {
-    display_name = "deploy-branches"
-    deploy_pipeline_id = oci_devops_deploy_pipeline.devops_deploy_pipeline.id
-    deploy_stage_predecessor_collection {
-        items {
-            id = oci_devops_deploy_pipeline.devops_deploy_pipeline.id
-        }
-    }
-    deploy_stage_type = "OKE_DEPLOYMENT"
-    kubernetes_manifest_deploy_artifact_ids = [oci_devops_deploy_artifact.devops_deploy_artifact_manifest_branches.id]
-    namespace = var.deployment_oke_cluster_namespace
-    oke_cluster_deploy_environment_id = oci_devops_deploy_environment.deploy_environment.id
-    rollback_policy {
-        policy_type = "AUTOMATED_STAGE_ROLLBACK_POLICY"
-    }
-}
-
-resource "oci_devops_deploy_stage" "devops_deploy_stage_frontend" {
-    display_name = "deploy-frontend"
-    deploy_pipeline_id = oci_devops_deploy_pipeline.devops_deploy_pipeline.id
-    deploy_stage_predecessor_collection {
-        items {
-            id = oci_devops_deploy_pipeline.devops_deploy_pipeline.id
-        }
-    }
-    deploy_stage_type = "OKE_DEPLOYMENT"
-    kubernetes_manifest_deploy_artifact_ids = [oci_devops_deploy_artifact.devops_deploy_artifact_manifest_frontend.id]
-    namespace = var.deployment_oke_cluster_namespace
-    oke_cluster_deploy_environment_id = oci_devops_deploy_environment.deploy_environment.id
-    rollback_policy {
-        policy_type = "AUTOMATED_STAGE_ROLLBACK_POLICY"
-    }
-}*/
