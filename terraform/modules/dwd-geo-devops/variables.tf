@@ -55,3 +55,6 @@ variable "arifact_build_spec_fn_image" {
 variable "resource_manager_trigger_function_id" {
   type = string
 }
+variable "arifact_build_spec_fn_payload" {
+  type = string
+}

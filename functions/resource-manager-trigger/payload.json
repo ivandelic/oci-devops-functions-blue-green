@@ -1,0 +1,4 @@
+{
+    "BUILD_ID": "${buildId}",
+    "STACK_ID": "${stackId}"
+}

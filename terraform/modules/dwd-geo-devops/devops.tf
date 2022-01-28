@@ -45,7 +45,6 @@ resource "oci_devops_build_pipeline_stage" "devops_build_pipeline_stage_build" {
             branch = "main"
         }
     }
-
     image = "OL7_X86_64_STANDARD_10"
 }
 
@@ -61,13 +60,17 @@ resource "oci_devops_build_pipeline_stage" "devops_build_pipeline_stage_deliver"
     }
     deliver_artifact_collection {
         items {
-            artifact_id = oci_devops_deploy_artifact.devops_deploy_artifact_image_departments.id
+            artifact_id = oci_devops_deploy_artifact.devops_deploy_artifact_fn_image.id
             artifact_name = var.arifact_build_spec_fn_image
+        }
+        items {
+            artifact_id = oci_devops_deploy_artifact.devops_deploy_artifact_fn_payload.id
+            artifact_name = var.arifact_build_spec_fn_payload
         }
     }
 }
 
-resource "oci_devops_deploy_artifact" "devops_deploy_artifact_image_departments" {
+resource "oci_devops_deploy_artifact" "devops_deploy_artifact_fn_image" {
     argument_substitution_mode = "SUBSTITUTE_PLACEHOLDERS"
     deploy_artifact_source {
         deploy_artifact_source_type = "OCIR"
@@ -75,7 +78,20 @@ resource "oci_devops_deploy_artifact" "devops_deploy_artifact_image_departments"
     }
     deploy_artifact_type = "DOCKER_IMAGE"
     project_id = oci_devops_project.devops_project.id
-    display_name = "image-departments"
+    display_name = "fn-image"
+}
+
+resource "oci_devops_deploy_artifact" "devops_deploy_artifact_fn_payload" {
+    argument_substitution_mode = "SUBSTITUTE_PLACEHOLDERS"
+    deploy_artifact_source {
+        deploy_artifact_source_type = "GENERIC_ARTIFACT"
+        deploy_artifact_path = var.arifact_build_spec_fn_payload
+        deploy_artifact_version = "1.0"
+        repository_id = oci_artifacts_repository.artifacts_repository.id
+    }
+    deploy_artifact_type = "GENERIC_FILE"
+    project_id = oci_devops_project.devops_project.id
+    display_name = "fn-payload"
 }
 
 resource "oci_devops_build_pipeline_stage" "devops_build_pipeline_stage_trigger" {
@@ -135,4 +151,5 @@ resource "oci_devops_deploy_stage" "test_deploy_stage" {
     function_deploy_environment_id = oci_devops_deploy_environment.deploy_environment.id
     is_async = false
     is_validation_enabled = false
+    deploy_artifact_id = oci_devops_deploy_artifact.devops_deploy_artifact_fn_payload.id
 }

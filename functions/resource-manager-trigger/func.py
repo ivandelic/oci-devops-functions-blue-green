@@ -10,6 +10,7 @@ from fdk import response
 
 defargs = {
     'STACK_ID': '',
+    'BUILD_ID': '',
     'OPERATION': 'APPLY'
 }
 

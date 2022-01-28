@@ -26,4 +26,5 @@ module "dwd_geo_devops" {
   container_image_path                            = "eu-frankfurt-1.ocir.io/frsxwtjslf35/dwd/"
   arifact_build_spec_fn_image                     = "api-retriever"
   resource_manager_trigger_function_id            = var.resource_manager_trigger_function_id
+  arifact_build_spec_fn_payload                   = "resource-manager-trigger-payload"
 }
