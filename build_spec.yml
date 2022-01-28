@@ -15,5 +15,12 @@ steps:
   - type: Command
     command: |
       cd functions/api-retriever
-      fn build
-      fn push
+      fn build --verbose
+      image=$(docker images | grep api-retriever | awk -F ' ' '{print $3}')
+      docker tag $image eu-frankfurt-1.ocir.io/frsxwtjslf35/dwd/api-retriever:latest
+      docker tag $image eu-frankfurt-1.ocir.io/frsxwtjslf35/dwd/api-retriever:$buildId
+
+outputArtifacts:
+  - name: api-retriever
+    type: DOCKER_IMAGE
+    location: eu-frankfurt-1.ocir.io/frsxwtjslf35/dwd/api-retriever
