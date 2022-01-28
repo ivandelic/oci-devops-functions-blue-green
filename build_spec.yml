@@ -1,0 +1,23 @@
+version: 0.1             
+component: build
+timeoutInSeconds: 1000
+shell: bash
+
+env:
+  exportedVariables:
+    - buildId
+
+steps:
+  - type: Command
+    command: |
+      buildId=`echo ${OCI_BUILD_RUN_ID} | rev | cut -c 1-7`
+      echo $buildId
+  - type: Command
+    command: |
+      cd functions/api-retriever
+      fn build
+
+outputArtifacts:
+  - name: api-retriever
+    type: DOCKER_IMAGE
+    location: eu-frankfurt-1.ocir.io/frsxwtjslf35/dwd/api-retriever
