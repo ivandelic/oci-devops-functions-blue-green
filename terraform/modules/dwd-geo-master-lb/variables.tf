@@ -34,3 +34,6 @@ variable "dns_zone_name" {
 variable "dns_zone_parent" {
   type = string
 }
+variable "dns_initial_cname_pointer" {
+  type = string
+}
