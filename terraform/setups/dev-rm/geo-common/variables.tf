@@ -5,15 +5,6 @@ variable "region" {
 variable "compartment_ocid" {
   type = string
 }
-variable "apigateway_ip_blue" {
+variable "dns_initial_cname_pointer" {
   type = string
-}
-variable "apigateway_port_blue" {
-  type = number
-}
-variable "apigateway_ip_green" {
-  type = string
-}
-variable "apigateway_port_green" {
-  type = number
 }

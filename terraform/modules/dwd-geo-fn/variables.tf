@@ -56,3 +56,11 @@ variable "dns_zone_name" {
 variable "dns_zone_parent" {
     type =string
 }
+
+# load blaancer
+variable "load_balancer_backendset_name" {
+  type = string
+}
+variable "load_balancer_id" {
+  type = string
+}

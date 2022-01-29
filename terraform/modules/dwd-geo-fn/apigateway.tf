@@ -96,3 +96,10 @@ resource "oci_apigateway_deployment" "deployment_apri_retriever" {
         }
     }
 }
+
+resource "oci_load_balancer_backend" "backend_blue" {
+    backendset_name = var.load_balancer_backendset_name
+    ip_address = oci_apigateway_gateway.apigateway_gateway.ip_addresses[0].ip_address
+    load_balancer_id = var.load_balancer_id
+    port = "443"
+}

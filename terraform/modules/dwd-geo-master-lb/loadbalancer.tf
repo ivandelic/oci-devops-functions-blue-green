@@ -120,17 +120,3 @@ resource "oci_load_balancer_listener" "listener" {
     port = 80
     protocol = "HTTP"
 }
-
-resource "oci_load_balancer_backend" "backend_blue" {
-    backendset_name = oci_load_balancer_backend_set.backend_set.name
-    ip_address = var.apigateway_ip_blue
-    load_balancer_id = oci_load_balancer_load_balancer.load_balancer.id
-    port = var.apigateway_port_blue
-}
-
-resource "oci_load_balancer_backend" "backend_green" {
-    backendset_name = oci_load_balancer_backend_set.backend_set.name
-    ip_address = var.apigateway_ip_green
-    load_balancer_id = oci_load_balancer_load_balancer.load_balancer.id
-    port = var.apigateway_port_green
-}

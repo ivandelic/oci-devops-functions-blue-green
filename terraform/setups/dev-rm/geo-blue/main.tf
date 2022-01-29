@@ -20,12 +20,14 @@ module "dwd_geo_fn" {
   deployment_route_path_frontend        = "/portal"
   dns_zone_name                         = "dwd"
   dns_zone_parent                       = "ivandelic.com"
+  load_balancer_backendset_name         = var.load_balancer_backendset_name
+  load_balancer_id                      = var.load_balancer_id
 }
 
 output "dwd_geo_fn_apigateway_ip" {
-    value = module.dwd_geo_fn.apigateway_external_ip
+  value = module.dwd_geo_fn.apigateway_external_ip
 }
 
 output "dwd_geo_fn_apigateway_fqdn" {
-    value = module.dwd_geo_fn.apigateway_fqdn
+  value = module.dwd_geo_fn.apigateway_fqdn
 }
