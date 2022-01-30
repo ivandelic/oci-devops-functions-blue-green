@@ -24,6 +24,6 @@ outputArtifacts:
   - name: api-retriever
     type: DOCKER_IMAGE
     location: eu-frankfurt-1.ocir.io/frsxwtjslf35/dwd/api-retriever
-  - name: resource-manager-trigger-payload
+  - name: fn-integration-payload
     type: BINARY
-    location: ${OCI_PRIMARY_SOURCE_DIR}/functions/resource-manager-trigger/payload.json
+    location: ${OCI_PRIMARY_SOURCE_DIR}/functions/devops-resource-manager-trigger/payload.json

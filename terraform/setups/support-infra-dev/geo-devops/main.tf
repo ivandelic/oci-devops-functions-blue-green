@@ -16,8 +16,8 @@ module "dwd_geo_devops" {
   deploy_dynamic_group_name                       = "DeployDynamicGroupDWD"
   devops_general_policy_name                      = "DevOpsDWD"
   devops_notification_topic_name                  = "dwd-geo-notifications"
-  devops_notification_subscription_endpoint_email = "ivan.delic@gmail.com"
-  devops_notification_subscription_endpoint_slack = "https://hooks.slack.com/services/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"
+  devops_notification_subscription_endpoint_email = var.devops_notification_subscription_endpoint_email
+  devops_notification_subscription_endpoint_slack = var.devops_notification_subscription_endpoint_slack
   devops_project_name                             = "dwd-geo-devops"
   devops_repository_name                          = "dwd-geo-repo"
   devops_build_pipeline_name                      = "dwd-geo-build-pipeline"
@@ -25,6 +25,7 @@ module "dwd_geo_devops" {
   artifact_repository_name                        = "dwd-geo-artifact-repo"
   container_image_path                            = "eu-frankfurt-1.ocir.io/frsxwtjslf35/dwd/"
   arifact_build_spec_fn_image                     = "api-retriever"
-  resource_manager_trigger_function_id            = var.resource_manager_trigger_function_id
-  arifact_build_spec_fn_payload                   = "resource-manager-trigger-payload"
+  fn_dns_switch_id                                = "ocid1.fnfunc.oc1.eu-frankfurt-1.aaaaaaaajneovdwn63ha2nmuixcnebipxvt4vdqyxu6gjlhasx527s3flvmq"
+  fn_resource_manager_trigger_id                  = "ocid1.fnfunc.oc1.eu-frankfurt-1.aaaaaaaahqvolmppyx74gkbq5cxndu6oit6jpm42ii63zzeglrq4ftio2pra"
+  arifact_build_spec_fn_payload                   = "fn-integration-payload"
 }

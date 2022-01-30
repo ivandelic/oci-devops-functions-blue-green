@@ -20,6 +20,10 @@ variable "private_key_path" {
   type = string
 }
 
-variable "resource_manager_trigger_function_id" {
+variable "devops_notification_subscription_endpoint_email" {
+  type = string
+}
+
+variable "devops_notification_subscription_endpoint_slack" {
   type = string
 }

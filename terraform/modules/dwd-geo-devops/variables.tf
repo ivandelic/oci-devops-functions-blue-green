@@ -52,7 +52,10 @@ variable "container_image_path" {
 variable "arifact_build_spec_fn_image" {
   type = string
 }
-variable "resource_manager_trigger_function_id" {
+variable "fn_resource_manager_trigger_id" {
+  type = string
+}
+variable "fn_dns_switch_id" {
   type = string
 }
 variable "arifact_build_spec_fn_payload" {

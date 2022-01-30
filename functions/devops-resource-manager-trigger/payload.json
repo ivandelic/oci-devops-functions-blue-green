@@ -1,4 +1,9 @@
 {
+    "BLUE_STACK_ID": "${blueStackId}",
+    "BLUE_FQDN": "${blueFqdn}",
+    "GREEN_STACK_ID": "${greenStackId}",
+    "GREEN_FQDN": "${greenFqdn}",
     "BUILD_ID": "${buildId}",
-    "STACK_ID": "${stackId}"
+    "ZONE_ID": "${zoneId}",
+    "DOMAIN": "${domainId}"
 }
