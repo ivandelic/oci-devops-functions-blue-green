@@ -35,38 +35,27 @@ def handler(ctx, data: io.BytesIO = None):
 
     if active_fqdn == args.get("BLUE_FQDN"):
         stack_id = args.get("GREEN_STACK_ID")
-        next_fqnd = args.get("GREEN_FQDN")
     elif active_fqdn == args.get("GREEN_FQDN"):
         stack_id = args.get("BLUE_STACK_ID")
-        next_fqnd = args.get("BLUE_FQDN")
     else:
-        raise ValueError('Wrong Active FQDN {active}, while expected {blue} or {green}'.format(active=active_fqdn, blue=args.get("BLUE_FQDN"), green=args.get("GREEN_FQDN")))
+        logging.getLogger().error('Wrong Active FQDN {active}, while expected {blue} or {green}'.format(active=active_fqdn, blue=args.get("BLUE_FQDN"), green=args.get("GREEN_FQDN")))
+        return "false"
 
-    dns_client.update_domain_records(
-        update_domain_records_details=oci.dns.models.UpdateDomainRecordsDetails(
-            items=[
-                oci.dns.models.RecordDetails(
-                    domain=active_item.domain,
-                    rdata=next_fqnd,
-                    rtype=active_item.rtype,
-                    ttl=active_item.ttl)]),
-        zone_name_or_id=args.get("ZONE_ID"),
-        domain=args.get("DOMAIN"))
+    rm_client = oci.resource_manager.ResourceManagerClient(config={}, signer=signer)
 
+    logging.getLogger().info('Started applying stack {active}'.format(active=stack_id))
 
-    '''
-    client = oci.resource_manager.ResourceManagerClient(config={}, signer=signer)
+    job_details=rm_client.create_job(
+        create_job_details=oci.resource_manager.models.CreateJobDetails(
+            stack_id=stack_id,
+            job_operation_details=oci.resource_manager.models.CreateApplyJobOperationDetails(
+                operation="APPLY",
+                execution_plan_strategy="AUTO_APPROVED")))
 
-    job_details=oci.resource_manager.models.CreateJobDetails(
-        stack_id=args.get("STACK_ID"),
-        job_operation_details=oci.resource_manager.models.CreateApplyJobOperationDetails(
-            operation="APPLY",
-            execution_plan_strategy="AUTO_APPROVED"))
+    job_id = job_details.data.id
+    job_response = rm_client.get_job(job_id)
+    oci.wait_until(rm_client, job_response, 'lifecycle_state', 'SUCCEEDED')
 
-    job = client.create_job(job_details)
+    logging.getLogger().info('Finished applying stack {active}'.format(active=stack_id))
 
-
-    logging.getLogger().info("Inside Python Hello World function")*/
-    '''
-
-    return response.Response(ctx, response_data=json.dumps({"message": "Completed {0}".format(args.get("BUILD_ID"))}), headers={"Content-Type": "application/json"})
+    return "true"
