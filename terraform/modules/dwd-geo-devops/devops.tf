@@ -191,12 +191,27 @@ resource "oci_devops_deploy_stage" "deploy_stage_rm_trigger" {
   deploy_artifact_id             = oci_devops_deploy_artifact.devops_deploy_artifact_fn_payload.id
 }
 
+resource "oci_devops_deploy_stage" "deploy_stage_approval" {
+  display_name       = "approve"
+  deploy_pipeline_id = oci_devops_deploy_pipeline.devops_deploy_pipeline.id
+  deploy_stage_predecessor_collection {
+    items {
+      id = oci_devops_deploy_stage.deploy_stage_rm_trigger.id
+    }
+  }
+  deploy_stage_type = "MANUAL_APPROVAL"
+  approval_policy {
+    approval_policy_type         = "COUNT_BASED_APPROVAL"
+    number_of_approvals_required = 1
+  }
+}
+
 resource "oci_devops_deploy_stage" "deploy_stage_dns_switch" {
   display_name       = "invoke-dns"
   deploy_pipeline_id = oci_devops_deploy_pipeline.devops_deploy_pipeline.id
   deploy_stage_predecessor_collection {
     items {
-      id = oci_devops_deploy_stage.deploy_stage_rm_trigger.id
+      id = oci_devops_deploy_stage.deploy_stage_approval.id
     }
   }
   deploy_stage_type              = "INVOKE_FUNCTION"
