@@ -49,4 +49,6 @@ def handler(ctx, data: io.BytesIO = None):
         zone_name_or_id=args.get("ZONE_ID"),
         domain=args.get("DOMAIN"))
 
+    logging.getLogger().info('Changed CNAME from {active} to {next}'.format(active=active_fqdn, next=next_fqnd))
+
     return "true"
