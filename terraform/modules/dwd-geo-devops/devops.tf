@@ -19,8 +19,18 @@ resource "oci_devops_build_pipeline" "devops_build_pipeline" {
   build_pipeline_parameters {
     items {
       name          = "buildId"
+      description   = "Build ID for Docker tag"
       default_value = "id"
-      description   = "Docker tag"
+    }
+    items {
+      name          = "commitId"
+      description   = "Commit ID"
+      default_value = "id"
+    }
+    items {
+      name          = "timestamp"
+      description   = "Commit ID"
+      default_value = "id"
     }
   }
 }
@@ -140,8 +150,18 @@ resource "oci_devops_deploy_pipeline" "devops_deploy_pipeline" {
   deploy_pipeline_parameters {
     items {
       name          = "buildId"
+      description   = "Build ID for Docker tag"
       default_value = "id"
-      description   = "Docker tag"
+    }
+    items {
+      name          = "commitId"
+      description   = "Commit ID"
+      default_value = "id"
+    }
+    items {
+      name          = "timestamp"
+      description   = "Commit ID"
+      default_value = "id"
     }
     items {
       name          = "zoneId"

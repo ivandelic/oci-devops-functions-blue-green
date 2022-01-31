@@ -6,12 +6,18 @@ shell: bash
 env:
   exportedVariables:
     - buildId
+    - commitId
+    - timestamp
 
 steps:
   - type: Command
     command: |
-      buildId=`echo ${OCI_BUILD_RUN_ID} | rev | cut -c 1-7`
-      echo $buildId
+      buildId=`echo ${OCI_BUILD_RUN_ID} | rev | cut -c 1-6 | rev`
+      echo "Build ID: $buildId"
+      commitId=`echo ${OCI_TRIGGER_COMMIT_HASH} | rev | cut -c 1-6 | rev`
+      echo "Commit ID: $commitId"
+      timestamp=`date +%s`
+      echo "Timestamp: $timestamp"
   - type: Command
     command: |
       cd functions/api-retriever
