@@ -7,7 +7,7 @@ resource "oci_artifacts_repository" "artifacts_repository" {
 
 resource "oci_artifacts_container_repository" "artifacts_container_repository" {
     compartment_id = var.compartment_ocid
-    display_name = var.arifact_build_spec_fn_image
+    display_name = var.arifact_true_fn_image_name
     is_immutable = false
     is_public = false
 }

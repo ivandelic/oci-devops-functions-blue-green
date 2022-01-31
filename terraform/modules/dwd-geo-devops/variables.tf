@@ -49,7 +49,13 @@ variable "artifact_repository_name" {
 variable "container_image_path" {
   type = string
 }
-variable "arifact_build_spec_fn_image" {
+variable "arifact_true_fn_image_name" {
+  type = string
+}
+variable "arifact_build_spec_fn_image_specific" {
+  type = string
+}
+variable "arifact_build_spec_fn_image_latest" {
   type = string
 }
 variable "fn_resource_manager_trigger_id" {

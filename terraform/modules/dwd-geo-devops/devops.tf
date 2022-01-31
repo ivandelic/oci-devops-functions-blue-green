@@ -29,7 +29,7 @@ resource "oci_devops_build_pipeline" "devops_build_pipeline" {
     }
     items {
       name          = "timestamp"
-      description   = "Commit ID"
+      description   = "Timestamp"
       default_value = "id"
     }
   }
@@ -71,7 +71,11 @@ resource "oci_devops_build_pipeline_stage" "devops_build_pipeline_stage_deliver"
   deliver_artifact_collection {
     items {
       artifact_id   = oci_devops_deploy_artifact.devops_deploy_artifact_fn_image.id
-      artifact_name = var.arifact_build_spec_fn_image
+      artifact_name = var.arifact_build_spec_fn_image_specific
+    }
+    items {
+      artifact_id   = oci_devops_deploy_artifact.devops_deploy_artifact_fn_image_latest.id
+      artifact_name = var.arifact_build_spec_fn_image_latest
     }
     items {
       artifact_id   = oci_devops_deploy_artifact.devops_deploy_artifact_fn_payload.id
@@ -84,7 +88,18 @@ resource "oci_devops_deploy_artifact" "devops_deploy_artifact_fn_image" {
   argument_substitution_mode = "SUBSTITUTE_PLACEHOLDERS"
   deploy_artifact_source {
     deploy_artifact_source_type = "OCIR"
-    image_uri                   = format("%s%s:$%s", var.container_image_path, var.arifact_build_spec_fn_image, "{buildId}")
+    image_uri                   = format("%s%s:$%s", var.container_image_path, var.arifact_true_fn_image_name, "{buildId}")
+  }
+  deploy_artifact_type = "DOCKER_IMAGE"
+  project_id           = oci_devops_project.devops_project.id
+  display_name         = "fn-image"
+}
+
+resource "oci_devops_deploy_artifact" "devops_deploy_artifact_fn_image_latest" {
+  argument_substitution_mode = "SUBSTITUTE_PLACEHOLDERS"
+  deploy_artifact_source {
+    deploy_artifact_source_type = "OCIR"
+    image_uri                   = format("%s%s:%s", var.container_image_path, var.arifact_true_fn_image_name, "latest")
   }
   deploy_artifact_type = "DOCKER_IMAGE"
   project_id           = oci_devops_project.devops_project.id
