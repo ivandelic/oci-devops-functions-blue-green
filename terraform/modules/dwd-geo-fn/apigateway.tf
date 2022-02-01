@@ -26,7 +26,7 @@ resource "oci_apigateway_deployment" "deployment_apri_retriever" {
                     <!DOCTYPE html>
                     <html lang="en">
                         <head>
-                            <title>Geoportal DevOps Demo</title>
+                            <title>DWD Geoportal DevOps Demo</title>
                             <link href="https://fonts.googleapis.com/css?family=Roboto+Slab" rel="stylesheet">
                             <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.13/vue.js'></script>
                             <script src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js'></script>
