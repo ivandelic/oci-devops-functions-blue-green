@@ -20,16 +20,16 @@ steps:
       cd functions/api-retriever
       fn build --verbose
       image=$(docker images | grep api-retriever | awk -F ' ' '{print $3}')
-      docker tag $image eu-frankfurt-1.ocir.io/frsxwtjslf35/dwd/api-retriever:$buildId
-      docker tag $image eu-frankfurt-1.ocir.io/frsxwtjslf35/dwd/api-retriever:latest
+      docker tag $image eu-frankfurt-1.ocir.io/frylmu0i5png/dwd/api-retriever:$buildId
+      docker tag $image eu-frankfurt-1.ocir.io/frylmu0i5png/dwd/api-retriever:latest
 
 outputArtifacts:
   - name: api-retriever-latest
     type: DOCKER_IMAGE
-    location: eu-frankfurt-1.ocir.io/frsxwtjslf35/dwd/api-retriever:latest
+    location: eu-frankfurt-1.ocir.io/frylmu0i5png/dwd/api-retriever:latest
   - name: api-retriever-specific
     type: DOCKER_IMAGE
-    location: eu-frankfurt-1.ocir.io/frsxwtjslf35/dwd/api-retriever
+    location: eu-frankfurt-1.ocir.io/frylmu0i5png/dwd/api-retriever
   - name: fn-integration-payload
     type: BINARY
     location: ${OCI_PRIMARY_SOURCE_DIR}/functions/devops-resource-manager-trigger/payload.json
