@@ -13,7 +13,7 @@ module "dwd_geo_fn" {
   subnet_id                             = "ocid1.subnet.oc1.eu-frankfurt-1.aaaaaaaanfk5lre5s75ax42hexvpcxb67vbb4kf3obycmb3ixinzkb3e5lcq"
   application_display_name              = "app-dwd-geo"
   function_display_name                 = "fn-api-retriever"
-  function_image                        = "fra.ocir.io/frsxwtjslf35/dwd/api-retriever:0.0.6"
+  function_image                        = "fra.ocir.io/frylmu0i5png/dwd/api-retriever:0.0.6"
   function_memory                       = "256"
   gateway_display_name                  = "gw-dwd-geo"
   deployment_display_name               = "dpl-dwd-geo"
