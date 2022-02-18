@@ -43,6 +43,7 @@ resource "oci_identity_policy" "devops_general_policy" {
       "Allow dynamic-group ${oci_identity_dynamic_group.build_dynamic_group.name} to manage generic-artifacts in compartment ${var.compartment_name}",
       "Allow dynamic-group ${oci_identity_dynamic_group.build_dynamic_group.name} to manage all-artifacts in compartment ${var.compartment_name}",
       "Allow dynamic-group ${oci_identity_dynamic_group.deploy_dynamic_group.name} to manage all-resources in compartment ${var.compartment_name}",
-      "Allow dynamic-group ${oci_identity_dynamic_group.functions_dynamic_group.name} to manage all-resources in compartment ${var.compartment_name}"
+      "Allow dynamic-group ${oci_identity_dynamic_group.functions_dynamic_group.name} to manage all-resources in compartment ${var.compartment_name}",
+      "Allow any-user to use functions-family in compartment ${var.compartment_name} where ALL {request.principal.type= 'ApiGateway', request.resource.compartment.id = '${var.compartment_ocid}'}"
     ]
 }
