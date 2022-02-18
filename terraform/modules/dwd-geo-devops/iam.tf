@@ -19,6 +19,13 @@ resource "oci_identity_dynamic_group" "deploy_dynamic_group" {
     name = var.deploy_dynamic_group_name
 }
 
+resource "oci_identity_dynamic_group" "functions_dynamic_group" {
+    compartment_id = var.tenancy_ocid
+    description = "Dynamic group for Functions to call other services"
+    matching_rule = "All {resource.type = 'fnfunc', resource.compartment.id = '${var.compartment_ocid}'}"
+    name = var.functions_dynamic_group_name
+}
+
 resource "oci_identity_policy" "devops_general_policy" {
     compartment_id = var.compartment_ocid
     description = "General policy for DevOps service "
@@ -35,6 +42,7 @@ resource "oci_identity_policy" "devops_general_policy" {
       "Allow dynamic-group ${oci_identity_dynamic_group.build_dynamic_group.name} to use artifact-repositories in compartment ${var.compartment_name}",
       "Allow dynamic-group ${oci_identity_dynamic_group.build_dynamic_group.name} to manage generic-artifacts in compartment ${var.compartment_name}",
       "Allow dynamic-group ${oci_identity_dynamic_group.build_dynamic_group.name} to manage all-artifacts in compartment ${var.compartment_name}",
-      "Allow dynamic-group ${oci_identity_dynamic_group.deploy_dynamic_group.name} to manage all-resources in compartment ${var.compartment_name}"
+      "Allow dynamic-group ${oci_identity_dynamic_group.deploy_dynamic_group.name} to manage all-resources in compartment ${var.compartment_name}",
+      "Allow dynamic-group ${oci_identity_dynamic_group.functions_dynamic_group.name} to manage all-resources in compartment ${var.compartment_name}"
     ]
 }
