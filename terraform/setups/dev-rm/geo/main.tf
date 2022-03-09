@@ -5,7 +5,7 @@ provider "oci" {
 module "dwd_geo_fn" {
   source                                = "../../../modules/dwd-geo-fn"
   compartment_ocid                      = var.compartment_ocid
-  color                                 = "blue"
+  color                                 = var.color
   subnet_id                             = "ocid1.subnet.oc1.eu-frankfurt-1.aaaaaaaanfk5lre5s75ax42hexvpcxb67vbb4kf3obycmb3ixinzkb3e5lcq"
   application_display_name              = "app-dwd-geo"
   function_display_name                 = "fn-api-retriever"

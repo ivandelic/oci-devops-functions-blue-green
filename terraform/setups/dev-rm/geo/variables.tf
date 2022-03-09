@@ -1,9 +1,12 @@
 # general
 variable "region" {
-    type = string
+  type = string
 }
 variable "compartment_ocid" {
-    type = string
+  type = string
+}
+variable "color" {
+  type = string
 }
 # load blaancer
 variable "load_balancer_backendset_name" {
