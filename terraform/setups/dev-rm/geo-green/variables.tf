@@ -12,3 +12,6 @@ variable "load_balancer_backendset_name" {
 variable "load_balancer_id" {
   type = string
 }
+variable subnet_id {
+  type = string
+}

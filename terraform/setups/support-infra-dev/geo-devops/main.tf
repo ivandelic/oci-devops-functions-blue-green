@@ -14,6 +14,7 @@ module "dwd_geo_devops" {
   coderepo_dynamic_group_name                     = "CoderepoDynamicGroupDWD"
   build_dynamic_group_name                        = "BuildDynamicGroupDWD"
   deploy_dynamic_group_name                       = "DeployDynamicGroupDWD"
+  functions_dynamic_group_name                    = "FunctionsDynamicGroupDWD"
   devops_general_policy_name                      = "DevOpsDWD"
   devops_notification_topic_name                  = "dwd-geo-notifications"
   devops_notification_subscription_endpoint_email = var.devops_notification_subscription_endpoint_email

@@ -22,6 +22,9 @@ variable "deploy_dynamic_group_name" {
 variable "devops_general_policy_name" {
   type = string
 }
+variable "functions_dynamic_group_name" {
+  type = string
+}
 variable "devops_notification_topic_name" {
   type = string
 }

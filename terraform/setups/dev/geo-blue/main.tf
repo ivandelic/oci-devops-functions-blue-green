@@ -23,5 +23,5 @@ module "dwd_geo_fn" {
   deployment_http_methods_frontend      = ["GET"]
   deployment_route_path_frontend        = "/portal"
   dns_zone_name                         = "dwd"
-  dns_zone_parent                       = "ivandelic.com"
+  dns_zone_parent                       = "dwd-hub.de"
 }

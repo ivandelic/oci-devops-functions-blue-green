@@ -170,32 +170,32 @@ resource "oci_devops_deploy_pipeline" "devops_deploy_pipeline" {
     }
     items {
       name          = "zoneId"
-      default_value = "ocid1.dns-zone.oc1..aaaaaaaamwsmfzxa5iguu3u3gm4aqb24sl35poyzxwk3sobtqe6hjsbvbhla"
+      default_value = "ocid1.dns-zone.oc1..aaaaaaaazvibehn7maotkmqvt7g54tfykzvbrfxif6xsqvjeuvnmy4d7rbda"
       description   = "DNS zone holding all domains for blue and green deployments"
     }
     items {
       name          = "domainId"
-      default_value = "geo.dwd.ivandelic.com"
+      default_value = "geo.dwd-hub.de"
       description   = "Master domain for production in DNS zone"
     }
     items {
       name          = "blueFqdn"
-      default_value = "dwd-blue.ivandelic.com."
+      default_value = "geo-blue.dwd-hub.de."
       description   = "Blue domain in DNS zone"
     }
     items {
       name          = "greenFqdn"
-      default_value = "dwd-green.ivandelic.com."
+      default_value = "geo-green.dwd-hub.de."
       description   = "Green domain in DNS zone"
     }
     items {
       name          = "blueStackId"
-      default_value = "ocid1.ormstack.oc1.eu-frankfurt-1.aaaaaaaahrabmdueht2qvvan2ammc4cimk2k4piw4pp6wy7ipt3ajqagfk5a"
+      default_value = "ocid1.ormstack.oc1.eu-frankfurt-1.aaaaaaaa4zxhy4jyofsy7ljh6xprzw55cix7i5fvxh2r2asbexe4bhubmxea"
       description   = "Blue Resource Manager Stack ID"
     }
     items {
       name          = "greenStackId"
-      default_value = "ocid1.ormstack.oc1.eu-frankfurt-1.aaaaaaaatoctnk2osftyrgiwnyeqm5sljjf3c6cpf2vzjmdjnc6auamo7uvq"
+      default_value = "ocid1.ormstack.oc1.eu-frankfurt-1.aaaaaaaa6jsd5yadb5dkodtgcnaec5rkmbqam5z2ovsqbpq3ytmhfrzgq72q"
       description   = "Green Resource Manager Stack ID"
     }
   }

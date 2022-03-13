@@ -1,6 +1,6 @@
 resource "oci_load_balancer_load_balancer" "load_balancer" {
     compartment_id = var.compartment_ocid
-    display_name = join("-", ["lb", var.name]) 
+    display_name = join("-", ["lb", var.name])
     shape = "flexible"
     subnet_ids = [var.subnet_id]
     shape_details {
@@ -84,7 +84,7 @@ resource "oci_load_balancer_certificate" "certificate" {
       tsMj85Dn/lDTNc/BNHw4lxIEaiOSjbpPSXgjTs3uU5e8+7/I+H0YELLXgfPEnnCq
       fWrRrjzZF8eJixGApIL8IPxc/k7XINc1i6EwoCeSLZnShW7aRfF964WFU82CaCg=
       -----END CERTIFICATE-----
-      
+
       EOT
     lifecycle {
         create_before_destroy = true
@@ -102,7 +102,7 @@ resource "oci_load_balancer_backend_set" "backend_set" {
         url_path = "/geo/portal"
     }
     load_balancer_id = oci_load_balancer_load_balancer.load_balancer.id
-    name = join("-", ["bs", var.name, "1"]) 
+    name = join("-", ["bs", var.name, "1"])
     policy = "ROUND_ROBIN"
     ssl_configuration {
         certificate_name = oci_load_balancer_certificate.certificate.certificate_name
@@ -116,7 +116,7 @@ resource "oci_load_balancer_backend_set" "backend_set" {
 resource "oci_load_balancer_listener" "listener" {
     default_backend_set_name = oci_load_balancer_backend_set.backend_set.name
     load_balancer_id = oci_load_balancer_load_balancer.load_balancer.id
-    name = join("-", ["lstn", var.name]) 
+    name = join("-", ["lstn", var.name])
     port = 80
     protocol = "HTTP"
 }

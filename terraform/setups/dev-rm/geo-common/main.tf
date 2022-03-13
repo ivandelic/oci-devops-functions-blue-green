@@ -7,8 +7,8 @@ module "dwd_geo_master_lb" {
   compartment_ocid          = var.compartment_ocid
   name                      = "dwd-geo"
   subnet_id                 = "ocid1.subnet.oc1.eu-frankfurt-1.aaaaaaaanfk5lre5s75ax42hexvpcxb67vbb4kf3obycmb3ixinzkb3e5lcq"
-  dns_zone_name             = "dwd"
-  dns_zone_parent           = "ivandelic.com"
+  dns_zone_name             = "geo"
+  dns_zone_parent           = "dwd-hub.de"
   dns_initial_cname_pointer = var.dns_initial_cname_pointer
 }
 

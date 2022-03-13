@@ -19,3 +19,13 @@ variable "fingerprint" {
 variable "private_key_path" {
     type = string
 }
+
+# general
+
+variable "dns_initial_cname_pointer" {
+  type = string
+}
+
+variable "lb_subnet_id" {
+    type = string
+}
